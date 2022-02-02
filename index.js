@@ -1,16 +1,19 @@
-// require Twilio and env file
-const client = require('twilio')(accountSid, authToken);
-const fs = require('fs');
-const env = require('dotenv').config()
+// require env file
+const env = require('dotenv').config().parsed
+
 // Twilio Credentials
 // To set up environmental variables, see http://twil.io/secure
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 
+// require Twilio
+const client = require('twilio')(env.accountSid, env.authToken);
+const fs = require('fs');
 
 // Bring in the answers
 const answers = require('./answers.json')
 const current = require('./current-answer.json')
+let brahz = env.brahz.split(',');
 
 
 answers.find((answer, i) => {
